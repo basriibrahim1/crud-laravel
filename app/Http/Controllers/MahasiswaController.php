@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class MahasiswaController extends Controller
@@ -30,7 +31,10 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.create');
+        if(Auth::user()->role == 'admin'){
+            return view('mahasiswa.create');
+        }
+        return redirect('/mahasiswa');
     }
 
     /**
